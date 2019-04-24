@@ -1,6 +1,6 @@
 package app.controller;
 
-import app.dao.UserDao;
+import app.dao.UserI;
 import app.dao.UserDaoImpl;
 import app.model.User;
 
@@ -14,7 +14,7 @@ import java.util.List;
 
 @WebServlet("/list")
 public class HomeController extends HttpServlet {
-    private UserDao dao = UserDaoImpl.getInstance();
+    private UserI dao = UserDaoImpl.getInstance();
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

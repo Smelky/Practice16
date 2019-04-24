@@ -10,7 +10,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import java.util.List;
 
-public class UserDaoImpl implements UserDao {
+public class UserDaoImpl implements UserI {
     private static volatile UserDaoImpl userDao = null;
     private SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
@@ -33,7 +33,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void deleteUser(Long id) {
+    public void deleteUser(Integer id) {
         Session session = this.sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
         User user = session.get(User.class, id);
@@ -43,7 +43,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public User findUserById(Long id) {
+    public User findUserById(Integer id) {
         Session session = this.sessionFactory.openSession();
         User user = session.get(User.class, id);
         session.close();
@@ -61,7 +61,7 @@ public class UserDaoImpl implements UserDao {
         return users;
     }
 
-    public static UserDao getInstance() {
+    public static UserI getInstance() {
         if (userDao == null) {
             synchronized (UserDaoImpl.class) {
                 if (userDao == null) {
