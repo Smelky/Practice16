@@ -2,6 +2,7 @@ package app.controller;
 
 import app.dao.UserI;
 import app.dao.UserDaoImpl;
+import app.model.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,7 +22,7 @@ public class UpdateController extends HttpServlet {
         } else {
             Integer id = Integer.parseInt(userId.get());
             UserI dao = UserDaoImpl.getInstance();
-            Optional user = dao.findUserById(id);
+            User user = dao.findUserById(id);
             request.setAttribute("user", user);
             request.getRequestDispatcher("/list").forward(request, response);
         }
