@@ -1,6 +1,6 @@
 package app.controller;
 
-import app.dao.UserI;
+import app.dao.UserDao;
 import app.dao.UserDaoImpl;
 
 import javax.servlet.ServletException;
@@ -13,15 +13,15 @@ import java.util.Optional;
 
 @WebServlet("/delete")
 public class DeleteController extends HttpServlet {
+    private UserDao dao = UserDaoImpl.getInstance();
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Optional<String> userId = Optional.of(request.getParameter("id"));
+        Optional<String> userId = Optional.ofNullable(request.getParameter("id"));
         if (userId.isEmpty()) {
             request.getRequestDispatcher("/list").forward(request, response);
-        }
-        else {
+        } else {
             Integer id = Integer.parseInt(userId.get());
-            UserI dao = UserDaoImpl.getInstance();
             dao.deleteUser(id);
             response.sendRedirect(request.getContextPath() + "/list");
         }

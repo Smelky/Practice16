@@ -1,6 +1,6 @@
 package app.controller;
 
-import app.dao.UserI;
+import app.dao.UserDao;
 import app.dao.UserDaoImpl;
 import app.model.User;
 
@@ -14,7 +14,7 @@ import java.util.Optional;
 
 @WebServlet("/register")
 public class UserRegistrationController extends HttpServlet {
-    private UserI dao = UserDaoImpl.getInstance();
+    private UserDao dao = UserDaoImpl.getInstance();
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -24,7 +24,7 @@ public class UserRegistrationController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws IOException {
 
-        Optional<String> userId = Optional.of(request.getParameter("id"));
+        Optional<String> userId = Optional.ofNullable(request.getParameter("id"));
         String name = request.getParameter("name");
         Integer age = Integer.valueOf(request.getParameter("age"));
         String salary = (request.getParameter("salary"));
