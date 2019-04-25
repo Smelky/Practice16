@@ -15,7 +15,7 @@ public class UserDaoImpl implements UserDao {
     private SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
     @Override
-    public void saveUser(User user) {
+    public void save(User user) {
         Session session = this.sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
         session.save(user);
@@ -24,7 +24,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void updateUser(User user) {
+    public void update(User user) {
         Session session = this.sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
         session.update(user);
@@ -33,7 +33,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void deleteUser(Integer id) {
+    public void delete(Integer id) {
         Session session = this.sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
         User user = session.get(User.class, id);
@@ -43,7 +43,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public User findUserById(Integer id) {
+    public User findById(Integer id) {
         Session session = this.sessionFactory.openSession();
         User user = session.get(User.class, id);
         session.close();

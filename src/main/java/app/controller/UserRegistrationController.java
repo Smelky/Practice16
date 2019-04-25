@@ -14,7 +14,7 @@ import java.util.Optional;
 
 @WebServlet("/register")
 public class UserRegistrationController extends HttpServlet {
-    private UserDao dao = UserDaoImpl.getInstance();
+    private UserDao userDao = UserDaoImpl.getInstance();
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -35,11 +35,11 @@ public class UserRegistrationController extends HttpServlet {
         user.setSalary(salary);
 
         if (userId.isEmpty())
-            dao.saveUser(user);
+            userDao.save(user);
         else {
             Integer id = Integer.parseInt(userId.get());
             user.setId(id);
-            dao.updateUser(user);
+            userDao.update(user);
         }
         response.sendRedirect(request.getContextPath() + "/list");
     }

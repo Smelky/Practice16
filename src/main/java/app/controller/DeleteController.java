@@ -13,16 +13,16 @@ import java.util.Optional;
 
 @WebServlet("/delete")
 public class DeleteController extends HttpServlet {
-    private UserDao dao = UserDaoImpl.getInstance();
+    private UserDao userDao = UserDaoImpl.getInstance();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Optional<String> userId = Optional.ofNullable(request.getParameter("id"));
-        if (userId.isEmpty()) {
+        if (!userId.isPresent()) {
             request.getRequestDispatcher("/list").forward(request, response);
         } else {
             Integer id = Integer.parseInt(userId.get());
-            dao.deleteUser(id);
+            userDao.delete(id);
             response.sendRedirect(request.getContextPath() + "/list");
         }
     }

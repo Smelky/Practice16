@@ -14,11 +14,11 @@ import java.util.List;
 
 @WebServlet("/list")
 public class HomeController extends HttpServlet {
-    private UserDao dao = UserDaoImpl.getInstance();
+    private UserDao userDao = UserDaoImpl.getInstance();
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        List<User> users = dao.findAll();
+        List<User> users = userDao.findAll();
         request.setAttribute("userslist", users);
         request.getRequestDispatcher("index.jsp").forward(request, response);
     }
